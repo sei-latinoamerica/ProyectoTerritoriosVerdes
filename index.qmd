@@ -1,5 +1,23 @@
 ---
-title: "ProyectoTerritoriosVerdes"
+title: "CARACTERIZACIÓN HIDROCLIMATOLÓGICA E HIDROGEOLÓGICA"
+author: "REGIONES DE BOYACÁ-SANTANDER, CARIBE (OCCIDENTAL Y ORIENTAL), CAUCA-NARIÑO, META-VICHADA Y TOLIMA-HUILA"
+format: 
+  revealjs:
+    slide-number: c/t
+    # width: '95%'
+    # height: '95%'
+    #aspect: 16:9
+    #logo: "theme/UNION-TEMPORAL.png"
+    footer: "[SEI Latinoamérica](https://www.sei.org/centres/latinoamerica/)"
+    theme: simple
+    css: ["theme/theme.css"]
+    transition: convex
+    transition-speed: fast
+    title-slide-attributes:
+      data-background-color: "#ffffff"
+      data-background-image: "theme/title-slide-background.svg"
+      data-background-size: "95% 95%"
+      data-background-position: "center"
 ---
 
 This is a Quarto website.
