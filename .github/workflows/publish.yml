@@ -22,10 +22,19 @@ jobs:
         with:
           r-version: '4.4.1'
 
+      - name: Install system dependencies for terra
+        run: sudo apt-get update && sudo apt-get install -y libgdal-dev libgeos-dev libproj-dev
+
       - name: Install R Dependencies
         uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 1
+
+      - name: Install terra manually
+        run: Rscript -e 'install.packages("terra", dependencies=TRUE, repos="https://cran.rstudio.com")'
+
+      - name: Test if terra loads correctly
+        run: Rscript -e 'library(terra)'
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
