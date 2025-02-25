@@ -26,17 +26,6 @@ h4{
   color: grey !important;
 }
 
-.slide_1{
-  font-size: 14px !important;
-}
-
-.slide_2{
-  font-size: 15px !important;
-  text-align: justify !important;
-  text-justify: inter-word !important;
-  vertical-align: middle !important;
-}
-
 .figure{
   vertical-align: middle !important;
   align-items: center !important;
@@ -48,11 +37,21 @@ h4{
   justify-content: center !important;
 }
 
-.slide_2 {
+
+.slide_3{
+  font-size: 12px !important;
+  text-align: justify !important;
+  text-justify: inter-word !important;
+  vertical-align: middle !important;
+}
+
+.slide_33{
+  font-size: 15px !important;
+  text-align: justify !important;
+  text-justify: inter-word !important;
+  vertical-align: middle !important;
   background-image: url("second-slide-background.svg") !important;
   background-position: right center !important;
   background-size: auto 100% !important;
   background-repeat: no-repeat !important;
 }
-
-

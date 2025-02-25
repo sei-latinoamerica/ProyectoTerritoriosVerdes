@@ -4,10 +4,6 @@ author: "REGIONES DE BOYACÁ-SANTANDER, CARIBE (OCCIDENTAL Y ORIENTAL), CAUCA-NA
 format: 
   revealjs:
     slide-number: c/t
-    # width: '95%'
-    # height: '95%'
-    #aspect: 16:9
-    #logo: "theme/UNION-TEMPORAL.png"
     footer: "[SEI Latinoamérica](https://www.sei.org/centres/latinoamerica/)"
     theme: simple
     css: ["theme/theme.css"]
@@ -66,3 +62,77 @@ leaflet(all_regions_wgs84) %>%
 
 ```
 
+## COBERTURAS DE LA TIERRA
+```{r}
+library(sf)
+library(terra)
+library(leaflet)
+library(leaflet.extras)
+
+# Cargar los datos
+all_regions_wgs84 <- st_read("./data/shp/all_regions_wgs84.shp", quiet = TRUE)
+colombia_wgs84 <- st_read("./data/shp/colombia_wgs84.shp", quiet = TRUE)
+
+# Cargar el raster con terra
+all_regions_land_cover_wgs84 <- rast("data/raster/all_regions_land_cover_wgs84.tif")
+all_regions_land_cover_wgs84 <- subst(all_regions_land_cover_wgs84, 42, 41)
+all_regions_land_cover_wgs84 <- subst(all_regions_land_cover_wgs84, 52, 51)
+
+# Definir valores y categorías de la cobertura
+land_cover_levels <- data.frame(
+  ID = c(11, 12, 13, 14, 21, 22, 23, 24, 31, 32, 33, 41, 51),
+  category = c(
+    "Zonas urbanizadas", 
+    "Zonas industriales o comerciales", 
+    "Zonas de extracción mineras y escombreras", 
+    "Zonas verdes artificializadas, no agrícolas", 
+    "Cultivos transitorios", 
+    "Cultivos permanentes", 
+    "Pastos", 
+    "Áreas agrícolas heterogéneas", 
+    "Bosques", 
+    "Áreas con vegetación herbácea y/o arbustiva", 
+    "Áreas abiertas, sin o con poca vegetación", 
+    "Áreas húmedas continentales", 
+    "Aguas continentales"
+  )
+)
+
+# Definir colores asociados a cada categoría
+color_map <- c(
+  "#ed0000", "#f73d2d", "#fc5f53", "#ff8080", 
+  "#ccb97c", "#d9cc7c", "#e8e17b", "#f5f57a", 
+  "#68ab63", "#9bd46c", "#d0ff73", "#b9d8eb", "#476ba1"
+)
+
+# Convertir el raster a factor
+all_regions_land_cover_wgs84 <- as.factor(all_regions_land_cover_wgs84)
+
+# Asignar los niveles al raster
+levels(all_regions_land_cover_wgs84) <- land_cover_levels
+
+# Crear la paleta de colores, asignando un color transparente a los NA
+pal <- colorFactor(palette = c(color_map, "transparent"), 
+                   domain = c(land_cover_levels$ID, NA))
+
+# Función de colores que asigna transparente a NA
+pal_fun <- function(values) {
+  colors <- pal(values)
+  colors[is.na(values)] <- "#00000000"  # Transparencia para NA
+  return(colors)
+}
+
+leaflet() %>%
+  addTiles() %>%
+  addRasterImage(all_regions_land_cover_wgs84, colors = pal_fun, group = "Cobertura del Suelo") %>% 
+  addPolygons(data = all_regions_wgs84, color = "black", weight = 1, fillOpacity = 0, group = "Regiones") %>%
+  addPolygons(data = colombia_wgs84, color = "black", weight = 1, fillOpacity = 0, group = "Colombia") %>%
+  addLegend(
+    position = "bottomright",
+    colors = color_map, 
+    labels = land_cover_levels$category, 
+    title = "Cobertura del suelo"
+  )
+
+
+```
