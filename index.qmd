@@ -20,10 +20,49 @@ format:
       data-background-position: "center"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## REGIONES DE INTERÉS
 
 ```{r}
-1 + 1
+library(leaflet)
+library(sf)
+library(htmltools)  # Para que los labels admitan HTML
+
+# Cargar los datos
+all_regions_wgs84 <- st_read("./data/shp/all_regions_wgs84.shp", quiet = TRUE)
+colombia_wgs84 <- st_read("./data/shp/colombia_wgs84.shp", quiet = TRUE)
+
+# Crear una función de colores para Leaflet
+region_pal <- colorFactor(
+  palette = c(
+    "#619cff", # Meta-Vichada
+    "#f565e2", # Tolima-Huila
+    "#01bfc5", # Cauca-Nariño
+    "#01bb38", # Caribe-Oriental
+    "#b79e01", # Caribe-Occidental
+    "#f8766d"  # Boyacá-Santander
+  ),
+  domain = all_regions_wgs84$Region
+)
+
+# Crear el mapa con Leaflet (solo labels, sin popups)
+leaflet(all_regions_wgs84) %>%
+  addTiles() %>%
+  addPolygons(
+    fillColor = ~region_pal(Region),  # CORREGIDO: ahora usa la función correctamente
+    color = "black",
+    weight = 1,
+    fillOpacity = 0.6,
+    label = ~lapply(
+      paste0("<b>Región:</b> ", Region, "<br><b>Área:</b> ", area_km2, " km²"),
+      HTML
+    ),  # Permite que el label acepte HTML para los saltos de línea
+    labelOptions = labelOptions(
+      style = list("font-weight" = "bold"),   
+      textsize = "12px",
+      direction = "auto"
+    )
+  ) %>%
+  addPolylines(data = colombia_wgs84, color = "black", weight = 1)
+
 ```
+
