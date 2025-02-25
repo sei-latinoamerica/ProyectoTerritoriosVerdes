@@ -49,5 +49,10 @@ h4{
 }
 
 .slide_2 {
-  background-image: url("theme/second-slide-background.svg");
+  background-image: url("second-slide-background.svg") !important;
+  background-position: right center !important;
+  background-size: auto 100% !important;
+  background-repeat: no-repeat !important;
 }
+
+
