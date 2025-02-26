@@ -134,5 +134,4 @@ leaflet() %>%
     title = "Cobertura del suelo"
   )
 
-
 ```
