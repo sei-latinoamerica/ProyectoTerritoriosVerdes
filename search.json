@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
     "objectID": "index.html#regiones-de-interés",
     "href": "index.html#regiones-de-interés",
     "title": "CARACTERIZACIÓN HIDROCLIMATOLÓGICA E HIDROGEOLÓGICA",
@@ -11,20 +18,13 @@
     "href": "index.html#coberturas-de-la-tierra",
     "title": "CARACTERIZACIÓN HIDROCLIMATOLÓGICA E HIDROGEOLÓGICA",
     "section": "COBERTURAS DE LA TIERRA",
-    "text": "COBERTURAS DE LA TIERRA"
+    "text": "COBERTURAS DE LA TIERRA\n\n\n\n\n\n\n\n\n\nFuente de información:\n\nIDEAM. (2021). Mapa nacional de coberturas de la tierra, escala 1:100.000, periodo 2018. Metodología Corine Land Cover adaptada para Colombia. Memoria técnica y resultados. http://documentacion.ideam.gov.co/openbiblio/bvirtual/023942/023942.html"
   },
   {
-    "objectID": "index.html#test",
-    "href": "index.html#test",
+    "objectID": "index.html#usos-de-la-tierra",
+    "href": "index.html#usos-de-la-tierra",
     "title": "CARACTERIZACIÓN HIDROCLIMATOLÓGICA E HIDROGEOLÓGICA",
-    "section": "test",
-    "text": "test\n\n\n[1] 2"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "section": "USOS DE LA TIERRA",
+    "text": "USOS DE LA TIERRA\n\n  Coberturas de tierra en Boyacá y Santander\n  Coberturas de tierra en el Caribe Occidental\n  Coberturas de tierra en el Caribe Oriental\n  Coberturas de tierra en Cauca y Nariño\n  Coberturas de tierra en Meta y Vichada\n  Coberturas de tierra en Tolima y Huila"
   }
 ]
