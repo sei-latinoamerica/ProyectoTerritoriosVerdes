@@ -24,8 +24,8 @@ library(sf)
 library(htmltools)  # Para que los labels admitan HTML
 
 # Cargar los datos
-all_regions_wgs84 <- st_read("./data/shp/all_regions_wgs84.shp", quiet = TRUE)
-colombia_wgs84 <- st_read("./data/shp/colombia_wgs84.shp", quiet = TRUE)
+all_regions_wgs84 <- st_read("./www/shp/all_regions_wgs84.shp", quiet = TRUE)
+colombia_wgs84 <- st_read("./www/shp/colombia_wgs84.shp", quiet = TRUE)
 
 # Crear una función de colores para Leaflet
 region_pal <- colorFactor(
@@ -70,11 +70,11 @@ library(leaflet)
 library(leaflet.extras)
 
 # Cargar los datos
-all_regions_wgs84 <- st_read("./data/shp/all_regions_wgs84.shp", quiet = TRUE)
-colombia_wgs84 <- st_read("./data/shp/colombia_wgs84.shp", quiet = TRUE)
+all_regions_wgs84 <- st_read("./www/shp/all_regions_wgs84.shp", quiet = TRUE)
+colombia_wgs84 <- st_read("./www/shp/colombia_wgs84.shp", quiet = TRUE)
 
 # Cargar el raster con terra
-all_regions_land_cover_wgs84 <- rast("data/raster/all_regions_land_cover_wgs84.tif")
+all_regions_land_cover_wgs84 <- rast("./www/raster/all_regions_land_cover_wgs84.tif")
 all_regions_land_cover_wgs84 <- subst(all_regions_land_cover_wgs84, 42, 41)
 all_regions_land_cover_wgs84 <- subst(all_regions_land_cover_wgs84, 52, 51)
 
@@ -135,8 +135,38 @@ leaflet() %>%
   )
 
 ```
+```{=html}
+<br>
 
-## test
-```{r}
-print(1+1)
+<ol class="fuentes">
+<strong>Fuente de información:</strong><br>
+
+<li>IDEAM. (2021). Mapa nacional de coberturas de la tierra, escala 1:100.000, periodo 2018. Metodología Corine Land Cover adaptada para Colombia. Memoria técnica y resultados. http://documentacion.ideam.gov.co/openbiblio/bvirtual/023942/023942.html</li>
+
+</ol>
+```
+
+## USOS DE LA TIERRA
+```{=html}
+<select id="imagenSelectorUsosTierra" onchange="cambiarImagen()">
+  <option value="./www/jpg/Coberturas/01.Boyaca_Santander.jpg">Coberturas de tierra en Boyacá y Santander</option>
+  <option value="./www/jpg/Coberturas/01.Caribe_Occidental.jpg">Coberturas de tierra en el Caribe Occidental</option>
+  <option value="./www/jpg/Coberturas/01.Caribe_Oriental.jpg">Coberturas de tierra en el Caribe Oriental</option>
+  <option value="./www/jpg/Coberturas/01.Cauca_Narino.jpg">Coberturas de tierra en Cauca y Nariño</option>
+  <option value="./www/jpg/Coberturas/01.Meta_Vichada.jpg">Coberturas de tierra en Meta y Vichada</option>
+  <option value="./www/jpg/Coberturas/01.Tolima_Huila.jpg">Coberturas de tierra en Tolima y Huila</option>
+</select>
+
+<img src="./www/jpg/Coberturas/01.Boyaca_Santander.jpg" id="imagenSeleccionada" alt="Imagen seleccionada">
+
+<script>
+  function cambiarImagen() {
+    var seleccion = document.getElementById("imagenSelectorUsosTierra").value;
+    var imagen = document.getElementById("imagenSeleccionada");
+    imagen.onerror = function() {
+      alert("Error al cargar la imagen: " + seleccion);
+    };
+    imagen.src = seleccion;
+  }
+</script>
 ```
